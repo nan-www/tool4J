@@ -22,11 +22,11 @@ public class AsyncUtil {
     }
 
     /**
-     * 在给定的时间内获取第一个执行成功并且符合 judgeFunction的结果。
-     * @apiNote 如果全部任务输出的结果都不符合调用方的需求则返回第一个完成的任务的结果。
-     * @param function 该方法内请不要捕获异常。如果在function中自行捕获了异常那么该方法等同于 {@link CompletableFuture#anyOf(CompletableFuture[])}
-     * @param timeout  单位毫秒
-     * @return Null 代表在规定时间内全都超时了，需要调用方特别判断。
+     * Obtain the first result that is successfully executed and meets the criteria of the judgeFunction within the given time.
+     * @apiNote If none of the task results meet the caller's requirements, return the result of the first completed task.
+     * @param function Do not catch exceptions within this method. If exceptions are caught within the function, this method is equivalent to {@link CompletableFuture#anyOf(CompletableFuture[])}
+     * @param timeout in milliseconds
+     * @return Null indicates that some tasks have timed out within the specified time, and the caller needs to handle this specially.
      */
     public <T, R> R batchSupplyAsyncAndGetSuccessOne(List<T> params, Function<T, R> function, long timeout, Function<R, Boolean> judgeFunction) {
         if (CollectionUtils.isEmpty(params)) {
